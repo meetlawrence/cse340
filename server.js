@@ -46,7 +46,7 @@ app.get('/projects', async (req, res) => {
 
 app.get('/Categories', async (req, res) => {
   const title = 'Categories';
-  res.render('Categories', { title });
+  res.render('categories', { title });
 })
 
 app.listen(PORT, () => {
