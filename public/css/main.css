@@ -1,20 +1,15 @@
 /* --- Variables & Reset --- */
 :root {
     --primary: #2c3e50;
-    /* Deep Navy */
     --accent: #27ae60;
-    /* Nature Green */
     --text: #34495e;
-    /* Soft Charcoal */
     --light-gray: #ecf0f1;
-    /* Background Gray */
     --white: #ffffff;
     --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 * {
     box-sizing: border-box;
-    /* Crucial for responsiveness */
 }
 
 body {
@@ -25,7 +20,7 @@ body {
     margin: 0;
 }
 
-/* --- Responsive Navigation --- */
+/* --- Responsive Navigation (Mobile First) --- */
 nav {
     background-color: var(--primary);
     padding: 1rem;
@@ -37,15 +32,14 @@ nav {
 nav ul {
     list-style: none;
     display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    /* Allows menu to wrap on small screens */
+    flex-direction: column;      /* Mobile default */
+    text-align: center;
     margin: 0;
     padding: 0;
 }
 
 nav ul li {
-    margin: 5px 15px;
+    margin: 10px 0;              /* Mobile spacing */
 }
 
 nav ul li a {
@@ -62,13 +56,11 @@ nav ul li a:hover {
     color: var(--accent);
 }
 
-/* --- Container & Main --- */
+/* --- Container & Main (Mobile First) --- */
 main {
-    max-width: 1000px;
-    width: 90%;
-    /* Fluid width for mobile */
+    width: 95%;                  /* Mobile default */
     margin: 2rem auto;
-    padding: 2rem;
+    padding: 1.5rem;
     background: var(--white);
     border-radius: 12px;
     box-shadow: var(--shadow);
@@ -76,7 +68,7 @@ main {
 
 h1 {
     color: var(--primary);
-    font-size: 2.2rem;
+    font-size: 1.8rem;            /* Mobile default */
     margin-bottom: 1rem;
     text-align: center;
 }
@@ -112,37 +104,9 @@ main ul li:hover {
 .main-logo {
     display: block;
     max-width: 100%;
-    /* Responsive image */
     height: auto;
     margin: 2rem auto;
     border-radius: 8px;
-}
-
-/* --- Media Queries (The "Responsive" Magic) --- */
-
-/* For Tablets and smaller */
-@media (max-width: 768px) {
-    h1 {
-        font-size: 1.8rem;
-    }
-
-    main {
-        width: 95%;
-        padding: 1.5rem;
-    }
-}
-
-/* For Phones */
-@media (max-width: 480px) {
-    nav ul {
-        flex-direction: column;
-        /* Stack menu items vertically */
-        text-align: center;
-    }
-
-    nav ul li {
-        margin: 10px 0;
-    }
 }
 
 /* --- Footer --- */
@@ -152,4 +116,58 @@ footer {
     background: var(--primary);
     color: var(--white);
     margin-top: 3rem;
+}
+
+/* --- Media Queries (Scale Up) --- */
+
+/* Tablets and Up */
+@media (min-width: 768px) {
+    h1 {
+        font-size: 2.2rem;
+    }
+
+    main {
+        max-width: 1000px;
+        width: 90%;
+        padding: 2rem;
+    }
+
+    nav ul {
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    nav ul li {
+        margin: 5px 15px;
+    }
+    
+    /* --- SQUARE CARDS LOGIC START --- */
+    .org-list {
+        display: grid;
+        /* Creates as many 250px cards as fit */
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+    }
+
+    .org-list li {
+        display: flex;
+        flex-direction: column;    /* STACKS IMAGE ON TOP OF TEXT */
+        align-items: center;       /* Centers items horizontally */
+        justify-content: center;   /* Centers items vertically */
+        text-align: center;
+        aspect-ratio: 1 / 1;       /* Makes the card a perfect square */
+        padding: 20px;
+        margin-bottom: 0;
+        border-left: 1px solid #ddd; 
+        border-top: 5px solid var(--accent); /* Accent bar on top of the card */
+    }
+
+    .org-list img {
+        height: 100px;
+        width: 100px;
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+    
 }
