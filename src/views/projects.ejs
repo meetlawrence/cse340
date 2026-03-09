@@ -1,17 +1,26 @@
 <%- include('partials/header') %>
 
 <main>
-    <h1>
-        <%= title %>
-    </h1>
+    <h1><%= title %></h1>
     <h2>Upcoming Service Projects</h2>
     <ul>
         <% projects.forEach(project => { %>
-        <li><%= new Date(project.project_date).toLocaleDateString('en-US', { 
+            <li>
+                <%# We use project.date here because of the 'AS date' alias in your model %>
+                <%= new Date(project.date).toLocaleDateString('en-US', { 
                         month: 'long', 
                         day: 'numeric', 
                         year: 'numeric' 
-                    }) %>: <strong><%= project.title %></strong> (<i><%= project.name %></i>)</li>
+                    }) %>: 
+                
+                <strong>
+                    <a href="/project/<%= project.project_id %>"><%= project.title %></a>
+                </strong> 
+                
+                (<i>
+                    <a href="/organization/<%= project.organization_id %>"><%= project.organization_name %></a>
+                </i>)
+            </li>
         <% }); %>
     </ul>
 </main>
