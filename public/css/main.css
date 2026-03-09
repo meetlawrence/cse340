@@ -221,11 +221,19 @@ main ul li:hover {
     vertical-align: middle;
 }
 
+.org-list li:hover {
+    transform: translateY(-3px);
+}
+
 /* Organization Links */
 .org-list a {
     text-decoration: none;
     color: var(--primary);
     font-weight: 900;
+}
+
+.org-list a:hover {
+    text-decoration: underline;
 }
 
 /* --- Image Handling --- */
@@ -287,7 +295,6 @@ footer {
         margin: 5px 15px;
         border-bottom: none;
     }
-    
 
     .navigation a:hover {
         color: var(--accent);
@@ -297,6 +304,7 @@ footer {
     .navigation a {
         padding: 0.5rem 0;
         text-align: left;
+        border-bottom: none;
     }
 
     /* Desktop Active State */
