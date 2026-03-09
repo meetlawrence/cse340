@@ -1,10 +1,12 @@
+// import needed models
 import { getAllOrganizations } from '../models/organization.js';
 
-const organizationsPage = async (req, res) => {
+const showOrganizationsPage = async (req, res) => {
     const organizations = await getAllOrganizations();
     const title = 'Our Partner Organizations';
 
     res.render('organizations', { title, organizations });
 };
 
-export { organizationsPage };
+// Export the controller function
+export { showOrganizationsPage };
