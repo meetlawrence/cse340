@@ -1,5 +1,6 @@
 // import needed models
-import { getAllOrganizations } from '../models/organization.js';
+import { getAllOrganizations, getOrganizationDetails } from '../models/organization.js';
+import { getProjectsByOrganizationId } from '../models/projects.js';    
 
 const showOrganizationsPage = async (req, res) => {
     const organizations = await getAllOrganizations();
@@ -8,5 +9,14 @@ const showOrganizationsPage = async (req, res) => {
     res.render('organizations', { title, organizations });
 };
 
+const showOrganizationDetailsPage = async (req, res) => {
+    const organizationId = req.params.id;
+    const organizationDetails = await getOrganizationDetails(organizationId);
+    const projects = await getProjectsByOrganizationId(organizationId);
+    const title = 'Organization Details';
+
+    res.render('organization', { title, organizationDetails, projects });
+};
+
 // Export the controller function
-export { showOrganizationsPage };
+export { showOrganizationsPage, showOrganizationDetailsPage };

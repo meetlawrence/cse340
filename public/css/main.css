@@ -2,7 +2,11 @@
 :root {
     --primary: #2c3e50;
     --accent: #27ae60;
+    --accent1: #2ecc71;
+    --accent3: #16a085;
     --text: #34495e;
+    --ink: #2c3e50;
+    --ink2: #ffffff;
     --light-gray: #ecf0f1;
     --white: #ffffff;
     --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -18,17 +22,68 @@ body {
     color: var(--text);
     background-color: var(--light-gray);
     margin: 0;
+    padding-top: 80px;
+    /* Prevents content from hiding under the fixed header */
 }
 
-/* MOBILE NAVIGATION & ANIMATED HAMBURGER */
-nav {
-    background-color: var(--primary);
-    padding: 1rem;
-    position: sticky;
+/* FIXED HEADER BAR */
+.header-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
     top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    background: var(--primary);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: var(--shadow);
     z-index: 1000;
 }
 
+/* LOGO AND TITLES */
+.header-flex {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-left: 1.5rem;
+}
+
+.logo-container {
+    background: linear-gradient(to right, var(--accent1), var(--accent));
+    border-radius: 8px;
+    padding: 0.5rem;
+    display: flex;
+    transition: transform 0.3s ease;
+}
+
+.logo-container:hover {
+    transform: scale(1.05);
+}
+
+.title-wrapper {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+}
+
+.title-main {
+    font-weight: 800;
+    color: var(--white);
+    text-transform: uppercase;
+    font-size: 1.1rem;
+}
+
+.title-sub {
+    font-weight: 400;
+    font-size: 0.75rem;
+    color: var(--accent);
+}
+
+/* MOBILE NAVIGATION & ANIMATED HAMBURGER */
 .navigation {
     display: flex;
     justify-content: flex-end;
@@ -40,7 +95,8 @@ nav {
     flex-direction: column;
     justify-content: space-between;
     width: 30px;
-    height: 20px;
+    height: 18px;
+    /* Adjusted for better symmetry */
     background: none;
     border: none;
     cursor: pointer;
@@ -51,11 +107,10 @@ nav {
 .bar {
     width: 100%;
     height: 3px;
-    background-color: var(--white);
+    background-color: var(--accent);
     border-radius: 10px;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
 /* Hamburger to X Animation */
 #menu.open .bar:nth-child(1) {
     transform: translateY(8.5px) rotate(45deg);
@@ -65,26 +120,29 @@ nav {
     transform: translateY(-8.5px) rotate(-45deg);
 }
 
+#menu.open .bar:nth-child(3) {
+    transform: translateY(-7.5px) rotate(-45deg);
+}
+
 /* MOBILE DROPDOWN MENU */
-nav ul {
+.navigation ul {
     display: none;
     list-style: none;
     margin: 0;
     padding: 0;
-    background: var(--primary);
+    background: var(--ink);
     flex-direction: column;
     position: absolute;
-    /* top: 80px; */
-    left: 50%;
-    transform: translateX(-50%);
+    top: 80px;
+    left: 0;
+    /* Changed from 50% + translate to 0 for a cleaner full-width feel */
     width: 100%;
-    /* box-shadow: var(--shadow); */
-    animation: slideDown 0.3s ease-out;
-
+    box-shadow: var(--shadow);
 }
 
 .navigation ul.open {
     display: flex;
+    animation: slideDown 0.3s ease-out;
 }
 
 .navigation a {
@@ -94,6 +152,7 @@ nav ul {
     padding: 1.2rem;
     text-align: center;
     transition: 0.3s;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .navigation a.active {
@@ -102,6 +161,18 @@ nav ul {
     border-radius: 8px;
     color: var(--ink);
     font-weight: 900;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* --- Container & Main (Mobile First) --- */
@@ -150,6 +221,13 @@ main ul li:hover {
     vertical-align: middle;
 }
 
+/* Organization Links */
+.org-list a {
+    text-decoration: none;
+    color: var(--primary);
+    font-weight: 900;
+}
+
 /* --- Image Handling --- */
 .main-logo {
     display: block;
@@ -188,32 +266,31 @@ footer {
         display: none;
     }
 
+    .header-bar {
+        justify-content: space-around;
+    }
+
     /* Horizontal Menu List */
-    nav ul {
+    .navigation ul {
         list-style: none;
         display: flex;
         flex-direction: row;
         justify-content: center;
         text-align: center;
-        position: relative;
+        position: static;
         padding: 0;
         background: none;
-    }
-
-    nav ul {
-        flex-direction: row;
-        justify-content: center;
-        flex-wrap: wrap;
+        box-shadow: none;
     }
 
     nav ul li {
         margin: 5px 15px;
+        border-bottom: none;
     }
     
 
     .navigation a:hover {
         color: var(--accent);
-        border-radius: 8px;
     }
 
     /* Desktop Link Styling */
