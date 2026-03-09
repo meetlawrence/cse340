@@ -20,7 +20,7 @@ body {
     margin: 0;
 }
 
-/* --- Responsive Navigation (Mobile First) --- */
+/* MOBILE NAVIGATION & ANIMATED HAMBURGER */
 nav {
     background-color: var(--primary);
     padding: 1rem;
@@ -29,36 +29,85 @@ nav {
     z-index: 1000;
 }
 
-nav ul {
-    list-style: none;
+.navigation {
     display: flex;
-    flex-direction: column;      /* Mobile default */
-    text-align: center;
+    justify-content: flex-end;
+    padding-right: 1.5rem;
+}
+
+#menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1100;
+}
+
+.bar {
+    width: 100%;
+    height: 3px;
+    background-color: var(--white);
+    border-radius: 10px;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Hamburger to X Animation */
+#menu.open .bar:nth-child(1) {
+    transform: translateY(8.5px) rotate(45deg);
+}
+
+#menu.open .bar:nth-child(2) {
+    transform: translateY(-8.5px) rotate(-45deg);
+}
+
+/* MOBILE DROPDOWN MENU */
+nav ul {
+    display: none;
+    list-style: none;
     margin: 0;
     padding: 0;
+    background: var(--primary);
+    flex-direction: column;
+    position: absolute;
+    /* top: 80px; */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    /* box-shadow: var(--shadow); */
+    animation: slideDown 0.3s ease-out;
+
 }
 
-nav ul li {
-    margin: 10px 0;              /* Mobile spacing */
+.navigation ul.open {
+    display: flex;
 }
 
-nav ul li a {
+.navigation a {
+    display: block;
     color: var(--white);
     text-decoration: none;
-    font-weight: 600;
-    text-transform: uppercase;
-    font-size: 0.9rem;
-    letter-spacing: 1px;
+    padding: 1.2rem;
+    text-align: center;
     transition: 0.3s;
 }
 
-nav ul li a:hover {
-    color: var(--accent);
+.navigation a.active {
+    margin: 0.5rem 1rem;
+    background: linear-gradient(to right, var(--accent1), var(--accent));
+    border-radius: 8px;
+    color: var(--ink);
+    font-weight: 900;
 }
 
 /* --- Container & Main (Mobile First) --- */
 main {
-    width: 95%;                  /* Mobile default */
+    width: 95%;
+    /* Mobile default */
     margin: 2rem auto;
     padding: 1.5rem;
     background: var(--white);
@@ -68,7 +117,8 @@ main {
 
 h1 {
     color: var(--primary);
-    font-size: 1.8rem;            /* Mobile default */
+    font-size: 1.8rem;
+    /* Mobile default */
     margin-bottom: 1rem;
     text-align: center;
 }
@@ -132,6 +182,24 @@ footer {
         padding: 2rem;
     }
 
+
+    /* Hide Mobile Menu Toggle */
+    #menu {
+        display: none;
+    }
+
+    /* Horizontal Menu List */
+    nav ul {
+        list-style: none;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        text-align: center;
+        position: relative;
+        padding: 0;
+        background: none;
+    }
+
     nav ul {
         flex-direction: row;
         justify-content: center;
@@ -142,6 +210,33 @@ footer {
         margin: 5px 15px;
     }
     
+
+    .navigation a:hover {
+        color: var(--accent);
+        border-radius: 8px;
+    }
+
+    /* Desktop Link Styling */
+    .navigation a {
+        padding: 0.5rem 0;
+        text-align: left;
+    }
+
+    /* Desktop Active State */
+    /* .navigation a.active {
+        background-color: transparent;
+        color: var(--accent3);
+        border-bottom-color: var(--accent);
+        border-radius: 8px;
+        margin: 0;
+        background: none;
+        font-weight: 900;
+    } */
+
+    nav ul li {
+        margin: 5px 15px;
+    }
+
     /* --- SQUARE CARDS LOGIC START --- */
     .org-list {
         display: grid;
@@ -152,15 +247,20 @@ footer {
 
     .org-list li {
         display: flex;
-        flex-direction: column;    /* STACKS IMAGE ON TOP OF TEXT */
-        align-items: center;       /* Centers items horizontally */
-        justify-content: center;   /* Centers items vertically */
+        flex-direction: column;
+        /* STACKS IMAGE ON TOP OF TEXT */
+        align-items: center;
+        /* Centers items horizontally */
+        justify-content: center;
+        /* Centers items vertically */
         text-align: center;
-        aspect-ratio: 1 / 1;       /* Makes the card a perfect square */
+        aspect-ratio: 1 / 1;
+        /* Makes the card a perfect square */
         padding: 20px;
         margin-bottom: 0;
-        border-left: 1px solid #ddd; 
-        border-top: 5px solid var(--accent); /* Accent bar on top of the card */
+        border-left: 1px solid #ddd;
+        border-top: 5px solid var(--accent);
+        /* Accent bar on top of the card */
     }
 
     .org-list img {
@@ -169,5 +269,5 @@ footer {
         margin-right: 0;
         margin-bottom: 15px;
     }
-    
+
 }
