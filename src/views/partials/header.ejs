@@ -34,4 +34,22 @@
                 <li><a href="/categories">Categories</a></li>
             </ul>
         </nav>
+        <div id="flash-container">
+    <% const messages = flash(); %>
+    <% Object.keys(messages).forEach(type => { %>
+        <% if (messages[type].length > 0) { %>
+            <% messages[type].forEach(msg => { %>
+                <div class="toast toast-<%= type %>">
+                    <div class="toast-content">
+                        <span class="toast-icon">
+                            <%= type === 'success' ? '✓' : 'ℹ' %>
+                        </span>
+                        <p class="toast-text"><%= msg %></p>
+                    </div>
+                    <button class="toast-close" onclick="this.parentElement.remove()">&times;</button>
+                </div>
+            <% }); %>
+        <% } %>
+    <% }); %>
+</div>
     </div>
