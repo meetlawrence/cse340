@@ -1,9 +1,10 @@
 /* --- Variables & Reset --- */
 :root {
     --primary: #2c3e50;
-    --accent: #27ae60;
+    --accent: #19723e;
     --accent1: #2ecc71;
-    --accent3: #16a085;
+    --accent2: #5cebc0;
+    --accent3: #0e5345;
     --text: #34495e;
     --ink: #2c3e50;
     --ink2: #ffffff;
@@ -80,7 +81,7 @@ body {
 .title-sub {
     font-weight: 400;
     font-size: 0.75rem;
-    color: var(--accent);
+    color: var(--accent2);
 }
 
 /* MOBILE NAVIGATION & ANIMATED HAMBURGER */
@@ -107,7 +108,7 @@ body {
 .bar {
     width: 100%;
     height: 3px;
-    background-color: var(--accent);
+    background-color: var(--accent2);
     border-radius: 10px;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -176,7 +177,7 @@ body {
 }
 
 /* --- Container & Main (Mobile First) --- */
-main {
+main, form {
     width: 95%;
     /* Mobile default */
     margin: 2rem auto;
@@ -243,6 +244,86 @@ main ul li:hover {
     height: auto;
     margin: 2rem auto;
     border-radius: 8px;
+}
+
+a {
+    color: var(--accent3);
+    text-decoration: none;
+    font-weight: 900;
+    transition: color 0.3s;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Form */
+
+form {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    max-width: 450px;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-main);
+    margin-bottom: 0.5rem;
+}
+
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+    /* Ensures padding doesn't break width */
+    outline: none;
+}
+
+input:focus,
+textarea:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+}
+
+textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+button[type="submit"] {
+    width: 100%;
+    background-color: var(--primary);
+    color: white;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    margin-top: 1rem;
+}
+
+button[type="submit"]:hover {
+    background-color: var(--accent);
+}
+
+button[type="submit"]:active {
+    transform: scale(0.98);
 }
 
 /* --- Footer --- */

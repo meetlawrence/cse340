@@ -4,6 +4,8 @@ import express from 'express';
 import { showHomePage } from './index.js';
 import { showOrganizationsPage } from './organizations.js';
 import { showOrganizationDetailsPage } from './organizations.js';
+import { showNewOrganizationForm } from './organizations.js';
+import { processNewOrganizationForm } from './organizations.js';
 import { showProjectsPage } from './projects.js';
 import { showProjectDetailsPage } from './projects.js'; 
 import { showCategoriesPage } from './categories.js';
@@ -18,6 +20,9 @@ router.get('/projects', showProjectsPage);
 router.get('/project/:id', showProjectDetailsPage); 
 router.get('/categories', showCategoriesPage);
 router.get('/organization/:id', showOrganizationDetailsPage);
+router.get('/new-organization', showNewOrganizationForm);
+// Route to handle new organization form submission
+router.post('/new-organization', processNewOrganizationForm);
 
 // error-handling routes
 router.get('/test-error', testErrorPage);

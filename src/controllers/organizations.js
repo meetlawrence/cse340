@@ -1,7 +1,9 @@
 // import needed models
 import { getAllOrganizations, getOrganizationDetails } from '../models/organization.js';
-import { getProjectsByOrganizationId } from '../models/projects.js';    
+import { getProjectsByOrganizationId } from '../models/projects.js';
+import { createOrganization } from '../models/organization.js';    
 
+// controller function to show organizations page
 const showOrganizationsPage = async (req, res) => {
     const organizations = await getAllOrganizations();
     const title = 'Our Partner Organizations';
@@ -9,6 +11,7 @@ const showOrganizationsPage = async (req, res) => {
     res.render('organizations', { title, organizations });
 };
 
+// controller function to show organization details page
 const showOrganizationDetailsPage = async (req, res) => {
     const organizationId = req.params.id;
     const organizationDetails = await getOrganizationDetails(organizationId);
@@ -18,5 +21,20 @@ const showOrganizationDetailsPage = async (req, res) => {
     res.render('organization', { title, organizationDetails, projects });
 };
 
+// controller function to show new organization form 
+const showNewOrganizationForm = (req, res) => {
+    const title = 'Add New Organization';
+    
+    res.render('new-organization', { title });
+};
+
+const processNewOrganizationForm = async (req, res) => {
+    const { name, description, contactEmail } = req.body;
+    const logoFilename = 'placeholder-logo.png'; // Use the placeholder logo for all new organizations
+
+    const organizationId = await createOrganization(name, description, contactEmail, logoFilename);
+    res.redirect(`/organization/${organizationId}`);
+};
+
 // Export the controller function
-export { showOrganizationsPage, showOrganizationDetailsPage };
+export { showOrganizationsPage, showOrganizationDetailsPage, showNewOrganizationForm, processNewOrganizationForm };
