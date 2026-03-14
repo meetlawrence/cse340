@@ -6,7 +6,7 @@
     <ul>
         <% projects.forEach(project => { %>
             <li>
-                <%# We use project.date here because of the 'AS date' alias in your model %>
+                <%# We use project.date here because of the 'AS date' alias in the model %>
                 <%= new Date(project.date).toLocaleDateString('en-US', { 
                         month: 'long', 
                         day: 'numeric', 
