@@ -13,7 +13,7 @@ import {
     processEditOrganizationForm
 } from './organizations.js';
 
-import { showProjectsPage } from './projects.js';
+import { showProjectsPage, showNewProjectForm, processNewProjectForm } from './projects.js';
 import { showProjectDetailsPage } from './projects.js'; 
 import { showCategoriesPage } from './categories.js';
 import { testErrorPage } from './errors.js';
@@ -35,6 +35,12 @@ router.post('/new-organization', organizationValidation, processNewOrganizationF
 router.get('/edit-organization/:id', showEditOrganizationForm);
 // Route to handle the edit organization form submission
 router.post('/edit-organization/:id', organizationValidation, processEditOrganizationForm);
+
+// Routes for new projects
+router.get('/new-project', showNewProjectForm);
+
+// Route to handle new project form submission
+router.post('/new-project', processNewProjectForm);
 
 // error-handling routes
 router.get('/test-error', testErrorPage);
