@@ -27,8 +27,14 @@
         <h3>Description</h3>
         <p><%= project.description %></p>
     </section>
-
-    <p><a href="/projects">← Back to Upcoming Projects</a></p>
+<section class="buttons">
+    <button>
+        <p><a href="/assign-categories/<%= project.project_id %>">Edit Categories</a></p>
+    </button>
+    <button>
+        <p><a href="/projects">← Back to Upcoming Projects</a></p>
+    </button>
+</section>
 </main>
 
 <%- include('partials/footer') %>

@@ -105,5 +105,46 @@ const createProject = async (title, description, location, project_date, organiz
   
 };
 
+const getCategoriesByServiceProjectId = async (projectId) => {
+  const query = `
+    SELECT 
+      categories.category_id, 
+      categories.category_name -- Changed from 'name' to 'category_name'
+    FROM categories            -- Changed from 'category' to 'categories'
+    INNER JOIN project_categories 
+      ON categories.category_id = project_categories.category_id
+    WHERE project_categories.project_id = $1;
+  `;
+
+  const result = await db.query(query, [projectId]);
+  return result.rows;
+};
+
+// const updateCategoryAssignments = async (projectId, categoryIds) => {
+//   // 1. First, remove all existing category assignments
+//   const deleteQuery = `DELETE FROM project_categories WHERE project_id = $1;`;
+//   await db.query(deleteQuery, [projectId]);
+
+//   // 2. ONLY run the insert if the array is not empty
+//   if (categoryIds && categoryIds.length > 0) {
+//     const insertQuery = `
+//       INSERT INTO project_categories (project_id, category_id)
+//       VALUES ${categoryIds.map((id, index) => `($1, $${index + 2})`).join(', ')};
+//     `;
+//     const queryValues = [projectId, ...categoryIds];
+//     await db.query(insertQuery, queryValues);
+//   }
+  
+//   // If the array was empty, the function simply finishes after the DELETE, 
+//   // which is exactly what you want (removing all categories).
+// };
+
 // Export the model functions
-export { getAllProjects, getProjectsByOrganizationId, getUpcomingProjects, getProjectDetails, createProject };
+export { 
+  getAllProjects, 
+  getProjectsByOrganizationId, 
+  getUpcomingProjects, 
+  getProjectDetails, 
+  createProject,
+  getCategoriesByServiceProjectId
+};
