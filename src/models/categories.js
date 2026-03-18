@@ -117,4 +117,45 @@ const getCategoriesForProject = async (project_id) => {
     }
 };
 
-export { getAllCategories, updateCategoryAssignments, getCategoryById, getprojectsByCategory, getCategoriesForProject };
+// Create a new category (for /new-category)
+const createCategory = async (categoryName) => {
+    try {
+        const query = `
+            INSERT INTO public.categories (category_name)
+            VALUES ($1)
+            RETURNING category_id;
+        `;
+        const result = await db.query(query, [categoryName]);
+        return result.rows[0].category_id;
+    } catch (error) {
+        console.error('Error creating category:', error);
+        throw error;
+    }
+};
+
+// Update an existing category name (for /edit-category/:id)
+const updateCategory = async (categoryId, categoryName) => {
+    try {
+        const query = `
+            UPDATE public.categories
+            SET category_name = $1
+            WHERE category_id = $2
+            RETURNING category_id;
+        `;
+        const result = await db.query(query, [categoryName, categoryId]);
+        return result.rows[0].category_id;
+    } catch (error) {
+        console.error('Error updating category:', error);
+        throw error;
+    }
+};
+
+export {
+    getAllCategories,
+    updateCategoryAssignments,
+    getCategoryById,
+    getprojectsByCategory,
+    getCategoriesForProject,
+    createCategory,
+    updateCategory
+};

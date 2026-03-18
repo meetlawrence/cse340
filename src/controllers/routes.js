@@ -23,7 +23,20 @@ import {
 } from './projects.js';
 
 import { showProjectDetailsPage } from './projects.js'; 
-import { showCategoriesPage, showAssignCategoriesForm, processAssignCategoriesForm, showCategoryDetailsPage } from './categories.js';
+
+import {
+    showCategoriesPage,
+    showAssignCategoriesForm,
+    processAssignCategoriesForm,
+    showCategoryDetailsPage,
+    categoryValidation,
+    showNewCategoryForm,
+    processNewCategoryForm,
+    showEditCategoryForm,
+    processEditCategoryForm
+} from './categories.js';
+
+
 import { testErrorPage } from './errors.js';
 
 const router = express.Router();
@@ -57,6 +70,12 @@ router.post('/assign-categories/:projectId', processAssignCategoriesForm);
 
 router.get('/edit-project/:id', showEditProjectForm);
 router.post('/edit-project/:id', projectValidation, processEditProjectForm);
+
+router.get('/new-category', showNewCategoryForm);
+router.post('/new-category', categoryValidation, processNewCategoryForm);
+
+router.get('/edit-category/:id', showEditCategoryForm);
+router.post('/edit-category/:id', categoryValidation, processEditCategoryForm);
 
 // error-handling routes
 router.get('/test-error', testErrorPage);

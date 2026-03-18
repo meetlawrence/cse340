@@ -17,6 +17,12 @@
   <% } else { %>
     <p>There are currently no projects assigned to this category.</p>
   <% } %>
+
+  <section class="buttons">
+    <button type="button">
+      <a href="/edit-category/<%= category.category_id %>">Edit Category</a>
+    </button>
+  </section>
 </main>
 
 <%- include('partials/footer') %>

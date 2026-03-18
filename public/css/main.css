@@ -441,6 +441,7 @@ button[type="submit"]:active {
 .list-container {
     display: flex;
     flex-direction: column;
+    padding: 0 20px;
     gap: 12px;
 }
 
@@ -728,7 +729,5 @@ footer {
     box-shadow: var(--shadow);
     width: 100%;
     max-width: 450px;
-}
-
-
+    }
 }
