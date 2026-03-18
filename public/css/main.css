@@ -265,7 +265,7 @@ form {
     background: white;
     padding: 2.5rem;
     /* border-radius: 16px; */
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    box-shadow: none;
     width: 100%;
     max-width: 450px;
 }
@@ -297,16 +297,6 @@ textarea {
     /* Ensures padding doesn't break width */
     outline: none;
 }
-
-/* .form-group input[type="date"] {
-    padding: 0.6rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1rem;
-    color: #444;
-    outline: none;
-    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-} */
 
 input:focus,
 textarea:focus {
@@ -582,6 +572,7 @@ footer {
 /* Container layout */
 .buttons {
     display: flex;
+    flex-wrap: wrap;
     gap: 16px;
     padding: 20px;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
