@@ -721,4 +721,14 @@ footer {
         margin-bottom: 15px;
     }
 
+    form {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    width: 100%;
+    max-width: 450px;
+}
+
+
 }
