@@ -1,10 +1,10 @@
 /* --- Variables & Reset --- */
 :root {
     --primary: #2c3e50;
-    --accent: #2563eb;
-    --accent1: #82c8f7;
-    --accent2: #8cabee;
-    --accent3: #1f59d6;
+    --accent: #19723e;
+    --accent1: #2ecc71;
+    --accent2: #5cebc0;
+    --accent3: #0e5345;
     --text: #34495e;
     --ink: #2c3e50;
     --ink2: #ffffff;
@@ -211,6 +211,8 @@ main ul li {
 }
 
 main ul li:hover {
+    background-color: #f9fafb;
+    border-color: var(--accent1);
     transform: translateX(5px);
 }
 
@@ -459,7 +461,7 @@ button[type="submit"]:active {
     align-items: center;
     background: #ffffff;
     border: 1px solid #e5e7eb;
-    border-left: 4px solid #3b82f6;
+    border-left: 6px solid var(--accent);
     /* Subtle blue accent instead of an icon */
     padding: 16px 24px;
     text-decoration: none;
@@ -484,13 +486,13 @@ button[type="submit"]:active {
 /* Hover State - Clean and Professional */
 .category-item:hover {
     background-color: #f9fafb;
-    border-color: #3b82f6;
+    border-color: var(--accent1);
     transform: translateX(5px);
     /* Gentle slide to the right */
 }
 
 .category-item:hover .category-action {
-    color: #3b82f6;
+    color: var(--accent1);
 }
 
 /* Mobile responsive */
