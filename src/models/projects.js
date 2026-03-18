@@ -142,9 +142,39 @@ const getCategoriesByServiceProjectId = async (projectId) => {
 //     await db.query(insertQuery, queryValues);
 //   }
   
-//   // If the array was empty, the function simply finishes after the DELETE, 
+//   // If the array was empty, the function simply finishes after the DELETE,
 //   // which is exactly what you want (removing all categories).
 // };
+
+const updateProject = async (projectId, title, description, location, project_date, organizationId) => {
+  const query = `
+    UPDATE service_projects
+    SET 
+        title = $1, 
+        description = $2, 
+        location = $3, 
+        project_date = $4,
+        organization_id = $5
+    WHERE project_id = $6
+    RETURNING project_id;
+  `;
+
+  // Array order: $1=title, $2=desc, $3=loc, $4=date, $5=org, $6=id
+  const result = await db.query(query, [
+    title, 
+    description, 
+    location, 
+    project_date, 
+    organizationId, 
+    projectId
+  ]);
+
+  if (result.rows.length === 0) {
+    throw new Error('No project found with that ID');
+  }
+
+  return result.rows[0].project_id;
+};
 
 // Export the model functions
 export { 
@@ -153,5 +183,6 @@ export {
   getUpcomingProjects, 
   getProjectDetails, 
   createProject,
-  getCategoriesByServiceProjectId
+  getCategoriesByServiceProjectId,
+  updateProject
 };
