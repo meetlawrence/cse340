@@ -15,7 +15,7 @@ import {
 
 import { showProjectsPage, showNewProjectForm, processNewProjectForm, projectValidation } from './projects.js';
 import { showProjectDetailsPage } from './projects.js'; 
-import { showCategoriesPage, showAssignCategoriesForm, processAssignCategoriesForm } from './categories.js';
+import { showCategoriesPage, showAssignCategoriesForm, processAssignCategoriesForm, showCategoryDetailsPage } from './categories.js';
 import { testErrorPage } from './errors.js';
 
 const router = express.Router();
@@ -26,6 +26,7 @@ router.get('/organizations', showOrganizationsPage);
 router.get('/projects', showProjectsPage);
 router.get('/project/:id', showProjectDetailsPage); 
 router.get('/categories', showCategoriesPage);
+router.get('/category/:id', showCategoryDetailsPage);
 router.get('/organization/:id', showOrganizationDetailsPage);
 router.get('/new-organization', showNewOrganizationForm);
 
@@ -48,8 +49,5 @@ router.post('/assign-categories/:projectId', processAssignCategoriesForm);
 
 // error-handling routes
 router.get('/test-error', testErrorPage);
-
-// Route to handle edit organization form submission
-router.post('/edit-organization/:id', organizationValidation, processNewOrganizationForm);
 
 export default router;

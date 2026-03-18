@@ -1,4 +1,11 @@
-import { getAllProjects, getUpcomingProjects, getProjectDetails, createProject } from "../models/projects.js"; 
+import { 
+    getAllProjects, 
+    getUpcomingProjects, 
+    getProjectDetails, 
+    createProject, 
+    getCategoriesByServiceProjectId
+} from "../models/projects.js";
+
 import { getAllOrganizations } from "../models/organization.js";
 import { body, validationResult } from 'express-validator';
 
@@ -35,13 +42,28 @@ const showProjectsPage = async (req, res) => {
 };
 
 const showProjectDetailsPage = async (req, res) => {
-    // Extracting the ID from the URL parameters
     const projectId = req.params.id;
 
-    // Retrieving the specific project from the database
-    const project = await getProjectDetails(projectId);
+    try {
+        const project = await getProjectDetails(projectId);
+        
+        // FETCH THE CATEGORIES HERE
+        const assignedCategories = await getCategoriesByServiceProjectId(projectId);
 
-    res.render('project', { title: project.title, project });
+        if (!project) {
+            return res.status(404).send("Project not found");
+        }
+
+        // PASS THEM TO THE VIEW HERE
+        res.render('project', { 
+            title: project.title, 
+            project, 
+            assignedCategories // This makes 'assignedCategories' available in project.ejs
+        });
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).send("Internal Server Error");
+    }
 };
 
 const showNewProjectForm = async (req, res) => {

@@ -1,10 +1,10 @@
 /* --- Variables & Reset --- */
 :root {
     --primary: #2c3e50;
-    --accent: #19723e;
-    --accent1: #2ecc71;
-    --accent2: #5cebc0;
-    --accent3: #0e5345;
+    --accent: #2563eb;
+    --accent1: #82c8f7;
+    --accent2: #8cabee;
+    --accent3: #1f59d6;
     --text: #34495e;
     --ink: #2c3e50;
     --ink2: #ffffff;
@@ -385,6 +385,120 @@ button[type="submit"]:active {
 .category-item:has(input:checked) {
     background: #ebf8ff;
     border-color: #3182ce;
+}
+
+/* Container spacing */
+.project-tags {
+    margin: 25px 0;
+    padding: 15px;
+    background-color: #f9fafb;
+    /* Very light gray to distinguish the section */
+    border-radius: 8px;
+}
+
+.project-tags h3 {
+    font-size: 1rem;
+    margin-bottom: 12px;
+    color: #374151;
+}
+
+/* Flexbox for the tags */
+.tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+/* The Tag Style */
+.tag {
+    display: inline-block;
+    background-color: #3b82f6;
+    /* A clean blue */
+    color: white;
+    padding: 5px 12px;
+    border-radius: 4px;
+    /* Slightly rounded for a "utility" look */
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+/* Hover state for interactivity */
+.tag:hover {
+    background-color: #2563eb;
+    transform: scale(1.05);
+}
+
+/* Container for the whole page */
+.category-page {
+
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.page-title {
+    font-size: 1.8rem;
+    color: #111827;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #f3f4f6;
+    padding-bottom: 10px;
+}
+
+/* The List Container */
+.list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Individual Item Styling */
+.category-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-left: 4px solid #3b82f6;
+    /* Subtle blue accent instead of an icon */
+    padding: 16px 24px;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.2s ease-in-out;
+}
+
+.category-name {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #374151;
+}
+
+.category-action {
+    font-size: 0.85rem;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+}
+
+/* Hover State - Clean and Professional */
+.category-item:hover {
+    background-color: #f9fafb;
+    border-color: #3b82f6;
+    transform: translateX(5px);
+    /* Gentle slide to the right */
+}
+
+.category-item:hover .category-action {
+    color: #3b82f6;
+}
+
+/* Mobile responsive */
+@media (max-width: 480px) {
+    .category-action {
+        display: none;
+        /* Hide 'View Projects' on mobile to keep it super clean */
+    }
 }
 
 /* --- Footer --- */

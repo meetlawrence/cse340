@@ -109,14 +109,21 @@ const getCategoriesByServiceProjectId = async (projectId) => {
   const query = `
     SELECT 
       categories.category_id, 
-      categories.category_name -- Changed from 'name' to 'category_name'
-    FROM categories            -- Changed from 'category' to 'categories'
+      categories.category_name
+    FROM categories
     INNER JOIN project_categories 
       ON categories.category_id = project_categories.category_id
     WHERE project_categories.project_id = $1;
   `;
 
+  // DEBUG: Check what ID is being sent to the database
+  console.log("Fetching categories for Project ID:", projectId);
+
   const result = await db.query(query, [projectId]);
+
+  // DEBUG: Check what the database actually returned
+  console.log("Database returned:", result.rows);
+
   return result.rows;
 };
 
