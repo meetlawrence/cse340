@@ -339,6 +339,18 @@ button[type="submit"]:active {
     margin-bottom: 2rem;
 }
 
+.form-group input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #334155;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+    /* Ensures padding doesn't break width */
+}
+
 /* Individual checkbox wrapper */
 .category-item {
     display: flex;
@@ -420,6 +432,46 @@ button[type="submit"]:active {
 .tag:hover {
     background-color: #2563eb;
     transform: scale(1.05);
+}
+
+.form-footer {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e2e8f0;
+    /* Subtle divider line */
+    text-align: center;
+}
+
+.form-footer p {
+    font-size: 0.9rem;
+    color: #64748b;
+    /* Slate 500 */
+    font-style: italic;
+    margin-bottom: 0.75rem;
+}
+
+.btn-secondary {
+    display: inline-block;
+    padding: 10px 20px;
+    border: 2px solid var(--accent1);
+    /* Modern Blue */
+    color: var(--accent);
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+    background-color: var(--accent1);
+    color: #ffffff;
+    box-shadow: var(--shadow);
+    transform: translateY(-1px);
+}
+
+.btn-secondary:active {
+    transform: translateY(0);
 }
 
 /* Container for the whole page */
