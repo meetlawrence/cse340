@@ -1,14 +1,15 @@
 import express from 'express';
 
-import { checkLogin } from '../middleware/auth.js';
-
 // Import controllers
 import {
     showUserRegistrationForm,
     processUserRegistrationForm,
     showLoginForm,
     processLoginForm,
-    processLogout
+    processLogout,
+    requireLogin,
+    showDashboard,
+    requireRole
 } from './users.js';
 
 import { showHomePage } from './index.js';
@@ -63,39 +64,43 @@ router.post('/login', processLoginForm);
 router.get('/logout', processLogout);
 
 router.get('/', showHomePage);
-router.get('/organizations', checkLogin, showOrganizationsPage);
-router.get('/projects', checkLogin, showProjectsPage);
-router.get('/project/:id', checkLogin, showProjectDetailsPage); 
-router.get('/categories', checkLogin,showCategoriesPage);
-router.get('/category/:id', checkLogin, showCategoryDetailsPage);
-router.get('/organization/:id', checkLogin, showOrganizationDetailsPage);
-router.get('/new-organization', checkLogin, showNewOrganizationForm);
+// Protected dashboard route
+router.get('/dashboard', requireLogin, showDashboard);
+
+// Organization routes
+router.get('/organizations', requireLogin, showOrganizationsPage);
+router.get('/projects', requireLogin, showProjectsPage);
+router.get('/project/:id', requireLogin, showProjectDetailsPage); 
+router.get('/categories', requireLogin, showCategoriesPage);
+router.get('/category/:id', requireLogin, showCategoryDetailsPage);
+router.get('/organization/:id', requireLogin, showOrganizationDetailsPage);
+router.get('/new-organization', requireRole('admin'), showNewOrganizationForm);
 
 // Route to handle new organization form submission
-router.post('/new-organization', organizationValidation, processNewOrganizationForm);
+router.post('/new-organization', requireRole('admin'), organizationValidation, processNewOrganizationForm);
 
-router.get('/edit-organization/:id', checkLogin, showEditOrganizationForm);
+router.get('/edit-organization/:id', requireRole('admin'), showEditOrganizationForm);
 // Route to handle the edit organization form submission
-router.post('/edit-organization/:id', organizationValidation, processEditOrganizationForm);
+router.post('/edit-organization/:id', requireRole('admin'), organizationValidation, processEditOrganizationForm);
 
 // Routes for new projects
-router.get('/new-project', checkLogin, showNewProjectForm);
+router.get('/new-project', requireRole('admin'), showNewProjectForm);
 
 // Route to handle new project form submission
-router.post('/new-project', projectValidation, processNewProjectForm);
+router.post('/new-project', requireRole('admin'), projectValidation, processNewProjectForm);
 
 // Routes to handle the assign categories to project form
-router.get('/assign-categories/:projectId', checkLogin, showAssignCategoriesForm);
-router.post('/assign-categories/:projectId', processAssignCategoriesForm);
+router.get('/assign-categories/:projectId', requireRole('admin'), showAssignCategoriesForm);
+router.post('/assign-categories/:projectId', requireRole('admin'), processAssignCategoriesForm);
 
-router.get('/edit-project/:id', checkLogin, showEditProjectForm);
-router.post('/edit-project/:id', projectValidation, processEditProjectForm);
+router.get('/edit-project/:id', requireRole('admin'), showEditProjectForm);
+router.post('/edit-project/:id', requireRole('admin'), projectValidation, processEditProjectForm);
 
-router.get('/new-category', checkLogin, showNewCategoryForm);
-router.post('/new-category', categoryValidation, processNewCategoryForm);
+router.get('/new-category', requireRole('admin'), showNewCategoryForm);
+router.post('/new-category', requireRole('admin'), categoryValidation, processNewCategoryForm);
 
-router.get('/edit-category/:id', checkLogin, showEditCategoryForm);
-router.post('/edit-category/:id', categoryValidation, processEditCategoryForm);
+router.get('/edit-category/:id', requireRole('admin'), showEditCategoryForm);
+router.post('/edit-category/:id', requireRole('admin'), categoryValidation, processEditCategoryForm);
 
 // error-handling routes
 router.get('/test-error', testErrorPage);
