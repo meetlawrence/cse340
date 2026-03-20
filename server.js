@@ -57,10 +57,15 @@ app.use((req, res, next) => {
 // Middleware to set res.locals variables for to all templates
 app.use((req, res, next) => {
     res.locals.isLoggedIn = false;
+    res.locals.isAdmin = false;
     if (req.session && req.session.user) {
         res.locals.isLoggedIn = true;
-    }
 
+        if (req.session.user.role === 'admin') {
+            res.locals.isAdmin = true;
+        }
+    }
+    
     res.locals.user = req.session.user || null;
 
     res.locals.NODE_ENV = NODE_ENV;

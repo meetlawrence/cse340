@@ -845,6 +845,35 @@ footer {
     to { transform: translateX(0); opacity: 1; }
 }
 
+
+.password-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-wrapper input {
+    width: 100%;
+    padding-right: 40px;
+    /* Make room for the eye so text doesn't overlap */
+}
+
+#togglePassword {
+    position: absolute;
+    right: 15px;
+    cursor: pointer;
+    color: #666;
+}
+
+#togglePassword:hover {
+    color: #333;
+}
+
+button a {
+    color: white;
+    text-decoration: none
+}
+
 /* --- Media Queries (Scale Up) --- */
 
 /* Tablets and Up */

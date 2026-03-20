@@ -9,18 +9,12 @@
     <p><strong>Account Level:</strong> <%= user.role_name %></p>
 
     <section class="buttons">
-      <button type="button">
-        <a href="/users">View Users</a>
-      </button>
-      <button type="button">
-        <a href="/organizations">View Organizations</a>
-      </button>
-      <button type="button">
-        <a href="/projects">View Projects</a>
-      </button>
-      <button type="button">
-        <a href="/categories">View Categories</a>
-      </button>
+        <% if (isAdmin) { %>
+            <button type="button"><a href="/users">View Users</a></button>
+        <button type="button"><a href="/organizations">View Organizations</a></button>
+        <button type="button"><a href="/projects">View Projects</a></button>
+        <button type="button"><a href="/categories">View Categories</a></button>
+        <% } %>
     </section>
 
     <hr>
