@@ -9,7 +9,10 @@ import {
     processLogout,
     requireLogin,
     showDashboard,
-    requireRole
+    requireRole,
+    showUsersPage,
+    showUserDetailsPage,
+    processRoleUpdate
 } from './users.js';
 
 import { showHomePage } from './index.js';
@@ -101,6 +104,16 @@ router.post('/new-category', requireRole('admin'), categoryValidation, processNe
 
 router.get('/edit-category/:id', requireRole('admin'), showEditCategoryForm);
 router.post('/edit-category/:id', requireRole('admin'), categoryValidation, processEditCategoryForm);
+
+// Routes to handles to display Users Page
+router.get('/users', requireRole('admin'), showUsersPage);
+router.post('/users', requireRole('admin'), showUsersPage);
+
+// Routes to handle User Details page
+router.get('/user', (req, res) => res.redirect('/users'));
+router.get('/user/:id', requireRole('admin'), showUserDetailsPage);
+router.post('/user/:id', requireRole('admin'), showUserDetailsPage);
+router.post('/user/update-role/:id', requireRole('admin'), processRoleUpdate);
 
 // error-handling routes
 router.get('/test-error', testErrorPage);

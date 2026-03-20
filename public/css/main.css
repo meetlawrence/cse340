@@ -621,7 +621,6 @@ footer {
     opacity: 0.7;
 }
 
-
 /* Container layout */
 .buttons {
     display: flex;
@@ -667,6 +666,179 @@ footer {
 
 
 .toast-close:hover { opacity: 1; }
+
+/* Container Layout */
+.directory-container {
+    max-width: 1100px;
+    margin: 2rem auto;
+    padding: 2rem;
+}
+
+.directory-header {
+    margin-bottom: 2.5rem;
+    border-bottom: 2px solid #f1f5f9;
+    padding-bottom: 1rem;
+}
+
+.subtitle {
+    color: #64748b;
+    font-size: 0.95rem;
+}
+
+/* The Grid */
+.user-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+/* User Card Styling */
+.user-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.2s ease-in-out;
+    position: relative;
+}
+
+.user-card:hover {
+    border-color: #3b82f6;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    transform: translateY(-4px);
+}
+
+/* Content Hierarchy */
+.user-name {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 0.25rem;
+}
+
+.user-email {
+    display: block;
+    font-size: 0.875rem;
+    color: #64748b;
+    margin-bottom: 1.25rem;
+}
+
+/* Dynamic Badges */
+.role-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+}
+
+.badge-admin {
+    background-color: #fef2f2;
+    color: #ef4444;
+    /* Red for Admins */
+}
+
+.badge-user {
+    background-color: #f0f9ff;
+    color: #0ea5e9;
+    /* Blue for regular Users */
+}
+
+/* Call to Action */
+.view-profile {
+    margin-top: auto;
+    padding-top: 1rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #3b82f6;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.user-card:hover .view-profile {
+    opacity: 1;
+}
+/* Container and Card */
+
+
+.profile-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    /* border-radius: 16px; */
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+/* Header Section */
+.profile-header {
+    background: #f8fafc;
+    padding: 2rem;
+    border-bottom: 1px solid #e2e8f0;
+    text-align: center;
+}
+
+.profile-header h2 {
+    color: #1e293b;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.user-info .user-name {
+    display: block;
+    font-weight: 700;
+    color: #334155;
+    font-size: 1.1rem;
+}
+
+.user-info .user-email {
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+/* Form Content */
+.profile-content {
+    padding: 2.5rem;
+}
+
+.info-group {
+    margin-bottom: 2rem;
+}
+
+.info-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #475569;
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+}
+
+/* Modern Select Dropdown */
+.role-select {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #1e293b;
+    background-color: #fff;
+    cursor: pointer;
+    transition: border-color 0.2s;
+}
+
+.role-select:focus {
+    outline: none;
+    border-color: #3b82f6;
+}
+
 
 @keyframes slideIn {
     from { transform: translateX(100%); opacity: 0; }

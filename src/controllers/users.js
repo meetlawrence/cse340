@@ -1,5 +1,11 @@
 import bcrypt from 'bcrypt';
-import { createUser, authenticateUser } from '../models/users.js';
+import {
+    createUser,
+    authenticateUser,
+    getAllUsers,
+    getUserById,
+    updateUserRole
+} from '../models/users.js';
 
 const showUserRegistrationForm = (req, res) => {
     res.render('register', { title: 'Register' });
@@ -108,6 +114,47 @@ const requireRole = (role) => {
     };
 }; 
 
+/* *****************************
+ * Display Users Page
+ * URL: /users/
+ * *****************************/
+
+const showUsersPage = async (req, res) => {
+    const users = await getAllUsers();
+    const title = 'Users';
+
+    res.render('users', { title, users });
+};
+
+const showUserDetailsPage = async (req, res) => {
+    const userId = req.params.id;
+    const user = await getUserById(userId);
+    const title = 'User Details';
+
+    res.render('user', { title, user });
+};
+
+const processRoleUpdate = async (req, res) => {
+    // Double-check: Is the person making this change actually an Admin?
+    if (!req.session.user || req.session.user.role_name !== 'admin') {
+        req.flash('error', 'Unauthorized: Only admins can change roles.');
+        return res.redirect('/');
+    }
+
+    const { role_name } = req.body;
+    const { id } = req.params;
+
+    try {
+        await updateUserRole(id, role_name);
+        req.flash('success', 'User role updated successfully.');
+        res.redirect(`/user/${id}`);
+    } catch (error) {
+        console.error(error);
+        req.flash('error', 'Failed to update user role.');
+        res.redirect(`/user/${id}`);
+    }
+};
+
 export {
     showUserRegistrationForm,
     processUserRegistrationForm,
@@ -115,5 +162,8 @@ export {
     processLogout,
     requireLogin,
     showDashboard,
-    requireRole
+    requireRole,
+    showUsersPage,
+    showUserDetailsPage,
+    processRoleUpdate
 };
