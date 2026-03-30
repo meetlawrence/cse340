@@ -127,14 +127,23 @@ const showUsersPage = async (req, res) => {
     res.render('users', { title, users });
 };
 
+
 const showUserDetailsPage = async (req, res) => {
     const userId = req.params.id;
     const user = await getUserById(userId);
-    const title = 'User Details';
+    const title = 'User Profile';
 
     res.render('user', { title, user });
 };
 
+
+const showEditUserForm = async (req, res) => {
+    const userId = req.params.id;
+    const user = await getUserById(userId); // Fetch the same data
+    const title = 'Edit User Permissions';
+
+    res.render('edit-user', { title, user });
+};
 const processRoleUpdate = async (req, res) => {
     // Double-check: Is the person making this change actually an Admin?
     if (!req.session.user || req.session.user.role_name !== 'admin') {
@@ -165,6 +174,7 @@ export {
     showDashboard,
     requireRole,
     showUsersPage,
+    showEditUserForm,
     showUserDetailsPage,
     processRoleUpdate
 };

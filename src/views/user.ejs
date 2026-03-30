@@ -1,39 +1,31 @@
 <%- include('partials/header') %>
 
-    <main class="profile-container">
-        <div class="profile-card">
-            <header class="profile-header">
-                <h2>Edit Permissions</h2>
-                <div class="user-info">
-                    <span class="user-name">
-                        <%= user.name %>
-                    </span>
-                    <span class="user-email">
-                        <%= user.email %>
-                    </span>
-                </div>
-            </header>
+<main class="profile-container">
+    <div class="profile-card">
+        <header class="profile-header">
+            <h2>User Profile Details</h2>
+            <div class="user-info">
+                <span class="user-name"><%= user.name %></span>
+                <span class="user-email"><%= user.email %></span>
+            </div>
+        </header>
 
-            <form action="/user/update-role/<%= user.user_id %>" method="POST" class="profile-content">
-                <div class="info-group">
-                    <label for="role_name">Account Status / Role</label>
-                    <select name="role_name" id="role_name" class="role-select">
-                        <option value="user" <%=user.role_name==='user' ? 'selected' : '' %>>Standard User</option>
-                        <option value="admin" <%=user.role_name==='admin' ? 'selected' : '' %>>Administrator</option>
-                    </select>
-                </div>  
-                <div class="form-actions">
-                    <button type="submit" >
-                        <a href="/users/"> Save Changes</a>
-                    </button>
-                    <section class="buttons">
-                        <button>
-                            <a href="/users/" class="btn-cancel">Cancel</a>
-                        </button>
-                    </section>
-                </div>
-            </form>
+        <div class="profile-content">
+            <div class="info-group">
+                <label>Account Status</label>
+                <p class="role-display">
+                    <%= user.role_name==='admin' ? 'Administrator' : 'Standard User' %>
+                </p>
+            </div>
+        
+            <div class="form-actions">
+                <a href="/user/edit/<%= user.user_id %>" class="btn-edit-link">
+                    <button type="button">Edit Permissions</button>
+                </a>
+                <a href="/users/" class="btn-cancel">Back to Users</a>
+            </div>
         </div>
-    </main>
+    </div>
+</main>
 
-    <%- include('partials/footer') %>
+<%- include('partials/footer') %>

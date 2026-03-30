@@ -12,6 +12,7 @@ import {
     requireRole,
     showUsersPage,
     showUserDetailsPage,
+    showEditUserForm,
     processRoleUpdate
 } from './users.js';
 
@@ -112,6 +113,7 @@ router.post('/users', requireRole('admin'), showUsersPage);
 // Routes to handle User Details page
 router.get('/user', (req, res) => res.redirect('/users'));
 router.get('/user/:id', requireRole('admin'), showUserDetailsPage);
+router.get('/user/edit/:id', requireRole('admin'), showEditUserForm);
 router.post('/user/:id', requireRole('admin'), showUserDetailsPage);
 router.post('/user/update-role/:id', requireRole('admin'), processRoleUpdate);
 
