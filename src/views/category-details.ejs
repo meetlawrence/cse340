@@ -18,13 +18,16 @@
     <p>There are currently no projects assigned to this category.</p>
   <% } %>
 
-  <section class="buttons">
-    <button type="button">
-      <% if (user && user.role_name==='admin' ) { %>
-        <a href="/edit-category/<%= category.category_id %>">Edit Category</a>
-      <% } %>
-    </button>
-  </section>
+  <% if (user && user.role_name==='admin' ) { %>
+    <section class="buttons">
+      <button type="button">
+        <% if (user && user.role_name==='admin' ) { %>
+          <a href="/edit-category/<%= category.category_id %>">Edit Category</a>
+          <% } %>
+      </button>
+    </section><%} 
+  %>
+  
 </main>
 
 <%- include('partials/footer') %>
