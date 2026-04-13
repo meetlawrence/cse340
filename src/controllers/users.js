@@ -7,6 +7,8 @@ import {
     updateUserRole
 } from '../models/users.js';
 
+import { checkVolunteerStatus, getProjectsByUser, removeVolunteer } from '../models/volunteer.js';
+
 const showUserRegistrationForm = (req, res) => {
     res.render('register', { title: 'Register' });
 };
@@ -78,16 +80,31 @@ const requireLogin = (req, res, next) => {
     }
     next();
 };
+const showDashboard = async (req, res) => {
+    try {
+        const user = req.session.user;
+        
+        // 1. Fix the ID name: your DB uses 'user_id'
+        const userId = user.user_id; 
 
-const showDashboard = (req, res) => {
-    const user = req.session.user;
-    res.render('dashboard', { 
-        title: 'Dashboard',
-        name: user.name,
-        email: user.email,
-        isAdmin: user.role_name === 'admin'
-    });
+        // 2. Fetch projects using the correct ID
+        const volunteeredProjects = await getProjectsByUser(userId);
+
+        // Debugging: This should now show a number > 0 in your terminal
+        console.log(`User ${userId} has ${volunteeredProjects.length} projects.`);
+
+        res.render('dashboard', { 
+            title: 'Dashboard',
+            // 3. Pass the full user object so the EJS can see user.name, user.email, etc.
+            user: user, 
+            volunteeredProjects 
+        });
+    } catch (error) {
+        console.error('Dashboard error:', error);
+        res.redirect('/500');
+    }
 };
+
 
 /**
  * Middleware factory to require specific role for route access

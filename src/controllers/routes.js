@@ -52,6 +52,11 @@ import {
 } from './categories.js';
 
 
+import {
+    processAddVolunteer,
+    processRemoveVolunteer
+} from './volunteer.js';
+
 import { testErrorPage } from './errors.js';
 
 const router = express.Router();
@@ -116,6 +121,10 @@ router.get('/user/:id', requireRole('admin'), showUserDetailsPage);
 router.get('/user/edit/:id', requireRole('admin'), showEditUserForm);
 router.post('/user/:id', requireRole('admin'), showUserDetailsPage);
 router.post('/user/update-role/:id', requireRole('admin'), processRoleUpdate);
+
+// Routes to handle volunteering
+router.post('/volunteer/add/:projectId', requireLogin, processAddVolunteer);
+router.post('/volunteer/remove/:projectId', requireLogin, processRemoveVolunteer);
 
 // error-handling routes
 router.get('/test-error', testErrorPage);

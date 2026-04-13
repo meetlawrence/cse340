@@ -1114,3 +1114,128 @@ button a {
 .btn-cancel:hover {
     color: #e74c3c;
 }
+/* RESET SPECIFIC FORMS TO BE INVISIBLE */
+form.form-button {
+    all: unset;
+    /* Clears all inherited styles from your general 'form' selector */
+    display: inline-block;
+    /* Keeps it in line with other elements */
+    width: auto;
+    margin: 0;
+    padding: 0;
+    background: none;
+    box-shadow: none;
+}
+
+/* Ensure the button inside doesn't stretch or have extra margin */
+.form-button button {
+    margin: 0;
+    width: auto;
+}
+
+/* Dashboard Volunteering Section */
+.volunteering-section {
+    margin-top: 2rem;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 0.5rem;
+}
+
+.commitment-count {
+    background: var(--accent);
+    color: white;
+    padding: 2px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+
+/* Grid Layout */
+.volunteer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+/* Individual Card Styling */
+.volunteer-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    border-left: 5px solid var(--accent);
+    /* Visual link to volunteering */
+    transition: transform 0.2s ease;
+}
+
+.volunteer-card:hover {
+    transform: translateY(-4px);
+}
+
+.org-name {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #6b7280;
+    font-weight: 600;
+}
+
+.project-title {
+    margin: 0.5rem 0;
+    font-size: 1.25rem;
+    color: var(--primary);
+}
+
+.project-snippet {
+    font-size: 0.9rem;
+    color: #4b5563;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+}
+
+/* Bottom Action Bar */
+.card-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #f3f4f6;
+    padding-top: 1rem;
+}
+
+.btn-view {
+    text-decoration: none;
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.btn-view:hover {
+    text-decoration: underline;
+}
+
+/* The Remove Button */
+.btn-remove-alt {
+    background: transparent;
+    border: 1px solid #fee2e2;
+    color: #ef4444;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-remove-alt:hover {
+    background: #fef2f2;
+    border-color: #ef4444;
+}

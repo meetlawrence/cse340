@@ -1,6 +1,6 @@
 <%- include('partials/header') %>
-
 <main>
+
     <h1><%= project.title %></h1>
     
     <section class="project-info">
@@ -39,9 +39,8 @@
     </section>
     
     <section class="buttons">
-        
-        <% if (user && user.role_name==='admin' ) { %>
-
+    
+        <% if (user && user.role_name === 'admin') { %>
             <button>
                 <a href="/assign-categories/<%= project.project_id %>">Edit Categories</a>
             </button>
@@ -49,9 +48,41 @@
             <button>
                 <a href="/edit-project/<%= project.project_id %>">Edit Project</a>
             </button>
-    
         <% } %>
 
+    </section>
+
+    <% if (isLoggedIn) { %>
+        <section class="buttons">
+            <% if (isVolunteering) { %>
+                <p>You are volunteering for this project!</p>
+                <button>
+                    <form action="/volunteer/remove/<%= project.project_id %>" method="POST" class="form-button">
+                        <input type="hidden" name="source" value="details">
+                        <button type="submit" class="btn-link">Remove Me</button>
+                    </form>
+                </button>
+
+                <button>
+                    <a href="/dashboard">View My Dashboard</a>
+                </button>
+
+
+            <% } else { %>
+                <button>
+                    <form action="/volunteer/add/<%= project.project_id %>" method="POST" class="form-button">
+                        <button type="submit" class="btn-volunteer">Volunteer Now</button>
+                    </form>
+                </button>
+            <% } %>
+        </section>
+    <% } %>
+
+    <hr>
+    <section class="buttons">
+        <button>
+            <a href="/organization/<%= project.organization_id %>">View Partner Organization</a>
+        </button>
         <button>
             <a href="/projects">← Back to Upcoming Projects</a>
         </button>

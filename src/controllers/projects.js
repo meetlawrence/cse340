@@ -10,6 +10,8 @@ import {
 import { getAllOrganizations } from "../models/organization.js";
 import { body, validationResult } from 'express-validator';
 
+import { checkVolunteerStatus } from "../models/volunteer.js";
+
 const projectValidation = [
     body('title')
         .trim()
@@ -51,6 +53,12 @@ const showProjectDetailsPage = async (req, res) => {
         // FETCH THE CATEGORIES HERE
         const assignedCategories = await getCategoriesByServiceProjectId(projectId);
 
+        let isVolunteering = false;
+
+        if (res.locals.user) {
+            isVolunteering = await checkVolunteerStatus(res.locals.user.user_id, projectId);
+        }
+
         if (!project) {
             return res.status(404).send("Project not found");
         }
@@ -59,8 +67,10 @@ const showProjectDetailsPage = async (req, res) => {
         res.render('project', { 
             title: project.title, 
             project, 
-            assignedCategories // This makes 'assignedCategories' available in project.ejs
+            assignedCategories, // This makes 'assignedCategories' available in project.ejs
+            isVolunteering
         });
+        
     } catch (error) {
         console.error('Error:', error);
         res.status(500).send("Internal Server Error");
